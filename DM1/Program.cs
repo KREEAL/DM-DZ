@@ -5,8 +5,35 @@ using System.IO;
 namespace DM1
 {
     class Program
-    { //Все перестановки
+
+    {
         public static int n;
+        public static int m;
+
+        //сочетания_без_повторений
+        public static bool NextSetBezPovtorenii(ref int[] a, int n, int m)
+        {
+            int k = m;
+            for (int i = k - 1; i >= 0; --i)
+                if (a[i] < n - k + i + 1)
+                {
+                    ++a[i];
+                    for (int j = i + 1; j < k; ++j)
+                        a[j] = a[j - 1] + 1;
+                    return true;
+                }
+            return false;
+        }
+        public static void PrintSochetanije(ref int[] a, int n,StreamWriter sw)
+        {
+            int num = 1;
+            for (int i = 0; i < n; i++)
+                sw.Write(a[i]+" ");
+            sw.WriteLine();
+        }
+
+
+        //Все перестановки
         static void Perestanovki(int k,bool[] used,Stack<int> l,StreamWriter sw) //k-длина
         {
             if (k == n)
@@ -74,6 +101,19 @@ namespace DM1
             Array.Sort(sets);
             sw2.WriteLine(string.Join("\n", sets));
             sw2.Close();
+
+            /*сочетание без повторений*/
+            StreamWriter sw3 = new StreamWriter("SochetanieBezPovtorov.txt");
+            m = 3;
+            int[] mass = new int[n];
+            a.CopyTo(mass);
+            if(n >= m)
+            {
+                while (NextSetBezPovtorenii(ref mass, n, m))
+                    PrintSochetanije(ref mass, m,sw3);
+            }
+
+            sw3.Close();
 
         }
     }
