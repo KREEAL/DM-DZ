@@ -31,6 +31,23 @@ namespace DM1
                 sw.Write(a[i]+" ");
             sw.WriteLine();
         }
+        //Сочетания с повторением
+        public static bool NextSetSPovtoreniem(ref int[] a, int h, int m)
+        {
+            int j = m - 1;
+            while (j >= 0 &&  a[j] == h) j--;
+
+
+            if (j < 0) return false;
+
+            if (a[j] >= h)
+                j--;
+            a[j]++;
+            if (j == m - 1) return true;
+            for (int k = j + 1; k < m; k++)
+                a[k] = a[j];
+            return true;
+        }
 
 
         //Все перестановки
@@ -114,6 +131,20 @@ namespace DM1
             }
 
             sw3.Close();
+
+            /*Сочетание с повторениями*/
+            StreamWriter sw4 = new StreamWriter("SochetanieSPovtoreniem.txt");
+            int h = Math.Max(n, m); // размер массива а выбирается как max(n,m)
+            int[] mass2 = new int[h];
+            a.CopyTo(mass2);
+            Console.WriteLine(mass2.Length);
+            foreach (int i in mass2)
+                Console.WriteLine(i);
+            for (int i = 0; i < h; i++)
+                mass2[i] = 1;
+            while (NextSetSPovtoreniem(ref mass2, n,m))
+                PrintSochetanije(ref mass2, m,sw4);
+            sw4.Close();
 
         }
     }
