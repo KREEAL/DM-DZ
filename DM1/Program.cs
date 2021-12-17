@@ -146,6 +146,10 @@ namespace DM1
                 PrintSochetanije(ref mass2, m,sw4);
             sw4.Close();
 
+            /*Размещения без повторений*/
+            StreamWriter sw5 = new StreamWriter("RacmeshenijeBezPovtorov");
+
+
         }
     }
 }
