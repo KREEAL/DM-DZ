@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Дано множество {a,b,c,d,e,f} построить все слова длины 5 в которых ровно две буквы а
+//а остальные повторяются/ не повторяются
 namespace narot
 {
     class Program
